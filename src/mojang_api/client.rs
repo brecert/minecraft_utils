@@ -3,7 +3,10 @@ use minreq::{Method, Request, Response, URL};
 
 #[doc(hidden)]
 pub fn fetch<U: Into<URL>>(method: Method, url: U) -> Request {
-    Request::new(method, url).with_header("User-Agent", "minecraft_utils/0.1.0")
+    Request::new(method, url).with_header(
+        "User-Agent",
+        concat!("minecraft_utils", env!("CARGO_PKG_VERSION")),
+    )
 }
 
 #[doc(hidden)]

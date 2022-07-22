@@ -9,9 +9,6 @@ pub mod error;
 /// Fetching the profile/textures, or username history of a user.
 pub mod profile;
 
-/// Fetching statistics relating the amount of games sold by Mojang.
-pub mod stats;
-
 /// Utilities for fetching basic user data, such as resolving a username to a UUID.
 pub mod user;
 
