@@ -151,14 +151,6 @@ pub struct UsernameEntry {
     pub changed_to_at: Option<u64>,
 }
 
-/// Gets the username history of a user.
-///
-/// [UsernameEntry::changed_to_at] in the first result will always be [None] while every subsequent entry will always be [Some]
-pub fn get_username_history(uuid: &str) -> Result<Vec<UsernameEntry>, ApiError> {
-    let url = format!("https://api.mojang.com/user/profiles/{}/names", uuid);
-    Ok(get(url)?.json()?)
-}
-
 #[cfg(test)]
 mod test {
     use super::*;
@@ -177,27 +169,5 @@ mod test {
         let profile = serde_json::from_str::<Profile>(&json).unwrap();
 
         assert_eq!(profile.textures().skin.url, "http://textures.minecraft.net/texture/b8130282b80cc08872bfc858975350ab3f3fcd4b1d18717bfb5b7b838fce4eaa")
-    }
-
-    #[test]
-    fn test_username_history() {
-        let history = get_username_history("7a8084cd1f444a159bb1eef8d5b535a1").unwrap();
-        assert_eq!(
-            history,
-            vec![
-                UsernameEntry {
-                    name: String::from("brecert"),
-                    changed_to_at: None,
-                },
-                UsernameEntry {
-                    name: String::from("Brecert"),
-                    changed_to_at: Some(1424118240000,),
-                },
-                UsernameEntry {
-                    name: String::from("brecert"),
-                    changed_to_at: Some(1636689908888,),
-                },
-            ],
-        );
     }
 }

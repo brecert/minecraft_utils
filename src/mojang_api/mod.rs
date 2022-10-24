@@ -16,5 +16,5 @@ pub mod user;
 pub mod client;
 
 pub use blocked_servers::BlockedServers;
-pub use profile::{get_username_history, Profile};
+pub use profile::Profile;
 pub use user::get_username_uuid;
